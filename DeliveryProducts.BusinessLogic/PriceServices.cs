@@ -7,7 +7,7 @@ namespace DeliveryProducts.BusinessLogic
     {
         public virtual decimal GetPrice(Product product, Delivery delivery)
         {
-            throw new NotImplementedException();
+            return product.Price + delivery.Price;
         }
     }
 }

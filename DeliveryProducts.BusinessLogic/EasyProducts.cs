@@ -7,7 +7,7 @@ namespace DeliveryProducts.BusinessLogic
         // легкие товары = цена товара + цена доставки в тип города
         public override decimal GetPrice(Product product, Delivery delivery)
         {
-            return product.Price + delivery.Price;
+            return base.GetPrice(product, delivery);
         }
     }
 }

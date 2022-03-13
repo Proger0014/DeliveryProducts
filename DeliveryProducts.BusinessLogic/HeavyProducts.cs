@@ -7,7 +7,7 @@ namespace DeliveryProducts.BusinessLogic
         // стоимость доставки + вес
         public override decimal GetPrice(Product product, Delivery delivery)
         {
-            return (product.Price + delivery.Price) + (decimal)product.Weight / 20;
+            return base.GetPrice(product, delivery) + (decimal)product.Weight / 20;
         }
     }
 }
