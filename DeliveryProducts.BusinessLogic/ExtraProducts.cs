@@ -6,7 +6,7 @@ namespace DeliveryProducts.BusinessLogic
     {
         public override decimal GetPrice(Product product, Delivery delivery)
         {
-            return base.GetPrice(product, delivery) + ((decimal)product.Weight / 20) + ((decimal)delivery.Speed / 20);
+            return base.GetPrice(product, delivery) + ((decimal)delivery.Speed / 20);
         }
     }
 }

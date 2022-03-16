@@ -21,7 +21,7 @@ namespace DeliveryProducts.DAL
 
             foreach (var product in productsDAL)
             {
-                productsCore.Add(new Core.Models.Product(product.Name, new Core.Models.Category(context.Categories.Find(product.CategoryId).Name), product.Weight, product.Price));
+                productsCore.Add(new Core.Models.Product(product.Name, new Core.Models.Category(context.Categories.Find(product.CategoryId).Name), product.Price));
             }
 
             return productsCore;
@@ -31,7 +31,7 @@ namespace DeliveryProducts.DAL
         {
             var productDAL = context.Products.Find(id);
 
-            return new Core.Models.Product(productDAL.Name, new Core.Models.Category(context.Categories.Find(productDAL.CategoryId).Name), productDAL.Weight, productDAL.Price);
+            return new Core.Models.Product(productDAL.Name, new Core.Models.Category(context.Categories.Find(productDAL.CategoryId).Name), productDAL.Price);
         }
     }
 }

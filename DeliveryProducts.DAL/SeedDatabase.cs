@@ -54,9 +54,9 @@ namespace DeliveryProducts.DAL
 
             var products = new List<DAL.Models.Product>()
             {
-                new () {Name = "Манга Demon Slayer ТОМ 1", CategoryId = 1, Weight =200, Price = 600.00m},
-                new () {Name = "Холодильник", CategoryId = 2, Weight = 100000, Price = 9999.00m},
-                new () {Name = "Прививка СПУТНИК", CategoryId = 3, Weight = 200, Price = 999.00m}
+                new () {Name = "Манга Demon Slayer ТОМ 1", CategoryId = 1, Price = 600.00m},
+                new () {Name = "Холодильник", CategoryId = 2, Price = 9999.00m},
+                new () {Name = "Прививка СПУТНИК", CategoryId = 3, Price = 999.00m}
             };
 
             _context.AddRange(products);
