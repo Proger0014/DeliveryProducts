@@ -35,11 +35,12 @@ namespace DeliveryProducts.WinForms
             _deliveriesService = deliveriesService;
             _citiesService = citiesService;
 
+            _seedDatabase = seedDatabase;
+            _seedDatabase.InitData();
+
             _products = _productsService.GetAll().ToList();
             _cities = _citiesService.GetAll().ToList();
             _deliveries = deliveriesService.GetAll().ToList();
-
-            _seedDatabase = seedDatabase;
 
             _easyProducts = new EasyProducts();
             _heavyProducts = new HeavyProducts();
@@ -83,7 +84,6 @@ namespace DeliveryProducts.WinForms
 
         private void Main_Load(object sender, EventArgs e)
         {
-            _seedDatabase.InitData();
             SetDateInCombobox();
         }
 

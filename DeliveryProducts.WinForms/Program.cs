@@ -36,10 +36,10 @@ namespace DeliveryProducts.WinForms
             services
                 .AddScoped<ProductContext>()
                 .AddScoped<ProductsService>()
-                .AddScoped<Main>()
                 .AddScoped<DeliveriesService>()
                 .AddScoped<CitiesService>()
-                .AddScoped<SeedDatabase>();
+                .AddScoped<SeedDatabase>()
+                .AddScoped<Main>();
 
             services
                 .AddScoped<IRepository<Category>, CategoriesRepository>()
