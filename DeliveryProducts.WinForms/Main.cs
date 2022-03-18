@@ -136,7 +136,6 @@ namespace DeliveryProducts.WinForms
         private void ChangeProductsList(string categoryName)
         {
             comboBox2.DataSource = _products.Where(c => c.Category.Name == categoryName).Select(c => c.Name).ToList();
-            comboBox2.SelectedIndex = -1;
         }
 
         private void AddWeight()
@@ -191,28 +190,34 @@ namespace DeliveryProducts.WinForms
             ChangeLocation(Locations.Minus);
         }
 
+        private void ChangeProductsListFormCategory(string category)
+        {
+            switch (category)
+            {
+                case "heavy":
+                    ChangeProductsList("heavy");
+                    AddWeight();
+                    break;
+
+                case "extra":
+                    ChangeProductsList("extra");
+                    DeleteWeight();
+                    break;
+
+                case "easy":
+                    ChangeProductsList("easy");
+                    DeleteWeight();
+                    break;
+            }
+        }
+
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             label5.Text = String.Empty;
             comboBox3.SelectedIndex = -1;
 
-            switch (comboBox1.SelectedIndex)
-            {
-                case 1:
-                    ChangeProductsList("heavy");
-                    AddWeight();
-                    break;
-
-                case 0:
-                    ChangeProductsList("extra");
-                    DeleteWeight();
-                    break;
-
-                case 2:
-                    ChangeProductsList("easy");
-                    DeleteWeight();
-                    break;
-            }
+            ChangeProductsListFormCategory(StringFormater.FormatCategoryNameEng(comboBox1.SelectedItem.ToString()));
+            comboBox2.SelectedIndex = -1;
 
             SetAmount();
         }
@@ -233,7 +238,7 @@ namespace DeliveryProducts.WinForms
         {
             bool isHeavy = int.TryParse(textBox1.Text, out int weight);
             
-            if (StringFormater.FormatCategoryNameEng(comboBox1.SelectedItem.ToString()) == "heavy")
+            if (comboBox1.SelectedItem != null && StringFormater.FormatCategoryNameEng(comboBox1.SelectedItem.ToString()) == "heavy")
             {
                 if (!isHeavy)
                 {
@@ -269,7 +274,40 @@ namespace DeliveryProducts.WinForms
                 return;
             }
 
+            if (comboBox1.SelectedIndex <= -1)
+            {
+                ChangeDeliveryLocation();
+            }
+
             SetAmount();
+        }
+
+        private void ChangeDeliveryLocation()
+        {
+            var checkedProduct = comboBox2.SelectedItem.ToString();
+            var product = _products.Where(p => p.Name == checkedProduct).Single();
+
+            SelectCategory(product.Category.Name);
+        }
+
+        private void SelectCategory(string categoryName)
+        {
+            switch (categoryName)
+            {
+                case "heavy":
+                    comboBox1.SelectedIndex = 1;
+                    break;
+
+                case "easy":
+                    comboBox1.SelectedIndex = 2;
+                    break;
+
+                case "extra":
+                    comboBox1.SelectedIndex = 0;
+                    break;
+            }
+
+            ChangeProductsListFormCategory(categoryName);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
